@@ -27,14 +27,14 @@ io.on("connection", (socket) => {
 
     const userMessage = isExist
       ? `${user.name}, here you go again`
-      : `Hey my love ${user.name}`;
+      : `${user.name}, you in my area`;
 
     socket.emit("message", {
-      data: { user: { name: "Admin" }, message: userMessage },
+      data: { user: { name: "admin" }, message: userMessage },
     });
 
     socket.broadcast.to(user.room).emit("message", {
-      data: { user: { name: "Admin" }, message: `${user.name} has joined` },
+      data: { user: { name: "admin" }, message: `${user.name} join` },
     });
 
     io.to(user.room).emit("room", {
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
       const { room, name } = user;
 
       io.to(room).emit("message", {
-        data: { user: { name: "Admin" }, message: `${name} has left` },
+        data: { user: { name: "admin" }, message: `${name}left` },
       });
 
       io.to(room).emit("room", {
