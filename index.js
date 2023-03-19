@@ -67,6 +67,9 @@ io.on("connection", (socket) => {
   });
 
   io.on("disconnect", () => {
+    socket.emit("disconnectUser", {
+      data: { users: getRoomUsers(room) },
+    });
     console.log("Disconnect");
   });
 });
